@@ -74,3 +74,50 @@ mock.onGet("home").reply((c) => {
   resultVO.message = "无权限";
   return [200, resultVO];
 });
+//模拟请求实验室列表  数组
+//config是axios config
+//返回一个数组[status, data, headers]
+mock.onGet("/admin/lablist").reply(function (c) {
+  return [
+    200,
+    {
+      labLists: [
+        {
+          id: 1,
+          number: "901",
+          machine: "48",
+          choice: true,
+          description: "vscode、idea",
+        },
+        {
+          id: 2,
+          number: "902",
+          machine: "120",
+          choice: true,
+          description: "非常好的实验室",
+        },
+        {
+          id: 3,
+          number: "903",
+          machine: "48",
+          choice: false,
+          description: "vscode、idea",
+        },
+        {
+          id: 4,
+          number: "904",
+          machine: "120",
+          choice: true,
+          description: "904实验室",
+        },
+        {
+          id: 5,
+          number: "905",
+          machine: "77",
+          choice: true,
+          description: "905的实验室",
+        },
+      ],
+    },
+  ];
+});
