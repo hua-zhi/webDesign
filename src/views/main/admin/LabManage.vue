@@ -1,34 +1,30 @@
 <template>
   <div>
+    实验室管理
+    <el-button type="primary">添加实验室</el-button>
     <ul>
-      <li v-for="(item, index) of LabList" :key="index">
-        {{ item.id }} /{{ item.number }} /{{ item.machine }}/{{ item.choice }}
+      <li v-for="(item, index) of labList" :key="index">
+        渲染/{{ item.id }} /{{ item.number }} /{{ item.machine }}/{{
+          item.choice
+        }}
       </li>
     </ul>
   </div>
 </template>
-<script>
-import { getLabList } from "@/api";
-export default {
-  data() {
+
+<script lang="ts">
+import { computed, defineComponent } from "vue";
+import { LAB_LISTS } from "@/store/VuexTypes";
+import { useStore } from "vuex";
+import { State } from "@/store";
+export default defineComponent({
+  setup() {
+    const store = useStore<State>();
+    store.dispatch(LAB_LISTS);
+    const labList = computed(() => store.state.labList);
     return {
-      LabList: [],
+      labList,
     };
   },
-  methods: {
-    allLabList() {
-      getLabList({}).then((res) => {
-        if (res.sucess) {
-          // 给data的allCityList 赋值接口数据
-          this.LabList = res.data;
-          console.log("Lablist", this.LabList);
-        }
-      });
-    },
-  },
-  mounted() {
-    // 页面挂在完毕后调用函数
-    this.allLabList();
-  },
-};
+});
 </script>
