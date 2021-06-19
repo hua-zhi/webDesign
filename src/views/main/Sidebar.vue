@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sidebar">
     <template v-for="(menu1, m1index) in menuList" :key="`m1-${m1index}`">
       <h3>{{ menu1.title }}</h3>
       <template v-if="menu1?.children.length > 0">
@@ -28,3 +28,28 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.sidebar {
+  background-color: rgb(234, 243, 241);
+}
+a {
+  text-decoration: none;
+  left: 0;
+  color: rgb(12, 11, 11);
+  background-color: rgb(164, 224, 216);
+}
+a:hover {
+  text-shadow: 2px;
+  background-color: rgb(192, 229, 221);
+}
+ul {
+  list-style: none;
+}
+li {
+  display: inline-block;
+  padding: 10px;
+  color: black;
+  text-align: left;
+  margin: 10px 0;
+}
+</style>

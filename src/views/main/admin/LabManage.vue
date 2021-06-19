@@ -22,6 +22,7 @@
               class="button delButton"
               size="mini"
               @click="removeItem(index)"
+              title="删除"
             >
               删除
             </button>
@@ -30,15 +31,15 @@
       </thead>
     </table>
     <button type="button" class="button addButton" @click="addItem">
-      add item
+      添加实验室
     </button>
-    <ul>
+    <!-- <ul>
       <li v-for="(item, index) of labList" :key="index">
         渲染/{{ item.id }} /{{ item.number }} /{{ item.machine }}/{{
           item.choice
         }}
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -72,3 +73,29 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table th,
+table td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+button {
+  background-color: #23a182;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 8px;
+}
+button:hover {
+  background-color: rgb(24, 109, 69);
+}
+</style>

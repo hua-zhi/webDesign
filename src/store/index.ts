@@ -1,22 +1,27 @@
 import { ActionTree, createStore, MutationTree } from "vuex";
-import { Menu, Lab } from "@/role/Menu";
+import { Menu, Lab, Teacher } from "@/role/Menu";
 import router from "@/router";
 import * as types from "./VuexTypes";
 import axios from "@/axios";
 import { ResultVO } from "./Response";
 import { setRole } from "@/role/Role";
-import { LabLists } from "@/role/LabLists";
+import { LabLists, updateLab } from "@/role/LabLists";
+import { UserLists } from "@/role/UserList";
 
 export interface State {
   menuList?: Menu[];
   exception?: string;
   labList?: Lab[];
+  lab?: Lab;
+  userList?: Teacher[];
 }
 
 const state: State = {
   menuList: [],
   exception: "",
   labList: [],
+  lab: { id: "" },
+  userList: [],
 };
 
 const getters = {
@@ -25,6 +30,8 @@ const getters = {
 };
 const mutations: MutationTree<State> = {
   [types.LAB_LISTS]: (state, data: Lab[]) => (state.labList = data),
+  [types.UPDATE_LAB]: (state, data: Lab) => (state.lab = data),
+  [types.USER_LISTS]: (state, data: Teacher[]) => (state.userList = data),
 };
 const actions: ActionTree<State, State> = {
   [types.LOGIN]: async (_, data: any) => {
@@ -46,6 +53,23 @@ const actions: ActionTree<State, State> = {
         commit(types.LAB_LISTS, LabLists());
       }, 50);
     }
+  },
+  [types.USER_LISTS]: ({ commit, state }) => {
+    if (state.userList?.length == 0) {
+      setTimeout(() => {
+        commit(types.USER_LISTS, UserLists());
+      }, 50);
+    }
+  },
+  async [types.UPDATE_LAB]({ commit }, upt: Lab) {
+    // try {
+    //   const resp = await axios.post<ResultVO>("updateLab", upt);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    setTimeout(() => {
+      commit(types.UPDATE_LAB, LabLists());
+    });
   },
 };
 

@@ -2,7 +2,8 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { ResultVO } from "@/store/Response";
 import { TEACHER, DIRECTOR, ADMIN } from "@/role/Role";
-
+import { LabLists, updateLab } from "@/role/LabLists";
+import _Result from "element-plus/lib/el-result";
 const mock = new MockAdapter(axios);
 
 // config，axios config对象。包含请求信息
@@ -77,7 +78,7 @@ mock.onGet("home").reply((c) => {
 //模拟请求实验室列表  数组
 //config是axios config
 //返回一个数组[status, data, headers]
-mock.onGet("/admin/lablist").reply(function (c) {
+mock.onGet("LabLists").reply((c) => {
   return [
     200,
     {
@@ -120,4 +121,19 @@ mock.onGet("/admin/lablist").reply(function (c) {
       ],
     },
   ];
+});
+mock.onPost("updateLab").reply((c) => {
+  const resultVO: ResultVO = { code: 200 };
+  const data = c.data;
+  const { id, number, machine, choice, description } = JSON.parse(data);
+  const upd = {
+    id: id,
+    number: number,
+    machine: machine,
+    choice: choice,
+    description: description,
+  };
+  const updateLabIn = updateLab(upd);
+  resultVO.data = { updateLabIn };
+  return [200, resultVO];
 });

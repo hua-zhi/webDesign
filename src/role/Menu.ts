@@ -5,10 +5,10 @@ export interface Menu {
   children?: Menu[];
 }
 export interface Lab {
-  id?: number;
+  id?: string;
   number?: string;
   machine?: string;
-  choice: boolean;
+  choice?: boolean;
   description?: string;
 }
 export interface Teacher {
@@ -16,10 +16,15 @@ export interface Teacher {
   name?: string;
   tel?: string;
   email?: string;
+  course?: Course[];
 }
 export interface Course {
   id?: number;
   name?: string;
   studentNumber?: number;
-  lab: Lab[];
+  lab?: Lab[];
+  time?: week[];
+}
+export interface week {
+  id?: number;
 }

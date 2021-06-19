@@ -23,8 +23,12 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         //教师管理
-        path: "/admin/userManage",
-        component: () => import("@/views/main/admin/UserManage.vue"),
+        path: "/admin/teacherManage",
+        component: () => import("@/views/main/admin/TeacherManage.vue"),
+      },
+      {
+        path: "/admin/addLab",
+        component: () => import("@/views/main/admin/AddLab.vue"),
       },
     ],
   },
@@ -38,8 +42,12 @@ const routes: Array<RouteRecordRaw> = [
 
 const menuList: Menu[] = [
   {
-    title: "系统管理模块",
+    title: "管理员管理",
     children: [
+      {
+        title: "添加实验室",
+        path: "/admin/addLab",
+      },
       {
         title: "实验室管理管理",
         path: "/admin/labManage",
@@ -50,7 +58,7 @@ const menuList: Menu[] = [
       },
       {
         title: "教师管理",
-        path: "/admin/userManage",
+        path: "/admin/teacherManage",
       },
     ],
   },
