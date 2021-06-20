@@ -39,10 +39,6 @@ const menuList: Menu[] = [
     title: "学生管理模块",
     children: [
       {
-        title: "学生管理",
-        path: "/teacher/students",
-      },
-      {
         title: "实验室预约",
         path: "/teacher/labAppointment",
       },

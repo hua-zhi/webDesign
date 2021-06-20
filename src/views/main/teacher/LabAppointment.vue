@@ -169,12 +169,13 @@
       ></el-table-column>
       <el-table-column label="操作">
         <template #default="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">
-            编辑
-          </el-button>
-          <el-button size="mini" type="danger" @click="dialogVisible = true">
-            <!-- @click="handleDelete(scope.$index, labinfolist, scope.row)" -->
-            删除
+          <el-button
+            size="mini"
+            type="success"
+            :disabled="!result"
+            @click="appointmant(scope.$index, scope.row)"
+          >
+            预约
           </el-button>
         </template>
       </el-table-column>
@@ -183,7 +184,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { LabLists } from "@/role/LabLists";
 import { LAB_LISTS } from "@/store/VuexTypes";
 import { useStore } from "vuex";
@@ -193,17 +194,21 @@ export default defineComponent({
     const store = useStore<State>();
     store.dispatch(LAB_LISTS);
     const labList = computed(() => store.state.labList);
+    const result = ref(true);
+    const appointmant = () => {
+      console.log("appointmant");
+      alert("预约成功");
+    };
+    // const appointmant =
     return {
       labList,
+      result,
+      appointmant,
     };
   },
 });
 </script>
 <style scoped>
-/* .big {
-  display: flex;
-}
-*/
 .item {
   display: inline-block;
   padding: 10px;

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <el-button plain type="sucess" @click="addItem"> 添加实验室 </el-button>
     <el-table
       row-key="date"
       ref="filterTable"
@@ -47,7 +46,11 @@
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">
             编辑
           </el-button>
-          <el-button size="mini" type="danger" @click="dialogVisible = true">
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleEdit(scope.$index, scope.row)"
+          >
             <!-- @click="handleDelete(scope.$index, labinfolist, scope.row)" -->
             删除
           </el-button>
@@ -55,7 +58,7 @@
       </el-table-column>
     </el-table>
     <!-- 删除对话框 -->
-    <el-dialog
+    <!-- <el-dialog
       title="删除"
       v-model="dialogVisible"
       width="30%"
@@ -70,37 +73,82 @@
           >
         </span>
       </template>
+    </el-dialog> -->
+    <!-- 编辑对话框 -->
+    <el-dialog title="修改信息" v-model="dialogFormVisible">
+      <el-form :model="update">
+        <el-form-item label="实验室编号" :label-width="formLabelWidth">
+          <el-input v-model="update.number" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="机器数量" :label-width="formLabelWidth">
+          <el-input v-model="update.machine" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="可选状态" :label-width="formLabelWidth">
+          <el-input v-model="update.choice" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="描述信息" :label-width="formLabelWidth">
+          <el-input v-model="update.description" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button plain type="primary" @click="updateEdit()"
+            >确 定</el-button
+          >
+        </span>
+      </template>
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref } from "vue";
-import { LAB_LISTS, ADD_LAB } from "@/store/VuexTypes";
+import { computed, defineComponent, Ref, ref } from "vue";
+import { LAB_LISTS, ADD_LAB, UPDATE_LAB, DELETE_LAB } from "@/store/VuexTypes";
 import { useStore } from "vuex";
 import { State } from "@/store";
 import { Lab } from "@/role/Menu";
 import { LabLists } from "@/role/LabLists";
-function useLabList(Labs: Ref<Lab[]>) {
-  const removeItem = (index: number) => {
-    console.log(index);
-
-    Labs.value.splice(index, 1);
-  };
-  return {
-    removeItem,
-  };
-}
 export default defineComponent({
   setup() {
     const store = useStore<State>();
     store.dispatch(LAB_LISTS);
     const labList = computed(() => store.state.labList);
+    const update = ref<Lab>();
+    const dialogFormVisible = ref(false);
+    const handleEdit = (index: any, row: any) => {
+      console.log("handleEdit");
+      update.value = {
+        id: row.id,
+        number: row.number,
+        machine: row.machine,
+        choice: row.choice,
+        description: row.description,
+      } as Lab;
+      dialogFormVisible.value = true;
+    };
+    const updateEdit = () => {
+      console.log(update.value);
+      store.dispatch(UPDATE_LAB, update.value);
+      dialogFormVisible.value = false;
+    };
+    const handleDelete = (index: any, rows: any, row: any) => {
+      console.log(rows);
+      const r = window.confirm("此操作将永久删除，是否继续？");
+      if (r == true) {
+        setTimeout(() => {
+          rows.splice(index, 1);
+        }, 500);
+        store.dispatch(DELETE_LAB, row.id);
+      }
+    };
     return {
       labList,
       dialogVisible: false,
-      // removeItem,
-      // addItem,
+      handleEdit,
+      updateEdit,
+      handleDelete,
+      dialogFormVisible,
     };
   },
 });

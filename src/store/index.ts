@@ -13,6 +13,7 @@ export interface State {
   exception?: string;
   labList?: Lab[];
   lab?: Lab;
+  Teacher?: Teacher;
   userList?: Teacher[];
 }
 
@@ -31,7 +32,9 @@ const getters = {
 const mutations: MutationTree<State> = {
   [types.LAB_LISTS]: (state, data: Lab[]) => (state.labList = data),
   [types.UPDATE_LAB]: (state, data: Lab) => (state.lab = data),
+  [types.DELETE_LAB]: (state, data: Lab) => (state.lab = data),
   [types.USER_LISTS]: (state, data: Teacher[]) => (state.userList = data),
+  // [types.UPDATE_USER]:(state,data:Teacher)=>(state.teacher = data)
 };
 const actions: ActionTree<State, State> = {
   [types.LOGIN]: async (_, data: any) => {
@@ -66,6 +69,13 @@ const actions: ActionTree<State, State> = {
       console.log("UPDATE_LAB");
       const resp = await axios.post<ResultVO>("updateLab", newLab);
       commit(types.UPDATE_LAB, resp.data.data.updated);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  async [types.DELETE_LAB]({ commit }, del: string) {
+    try {
+      const resp = await axios.post<ResultVO>("deleteLab", del);
     } catch (error) {
       console.log(error);
     }

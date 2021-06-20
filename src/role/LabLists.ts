@@ -48,3 +48,10 @@ export function updateLab(updLap: Lab) {
   });
   return updLap;
 }
+export function deleteLab(del: string) {
+  LabList.forEach((x) => {
+    if (x.id == del) {
+      LabList.splice(LabList.indexOf(x), 1);
+    }
+  });
+}

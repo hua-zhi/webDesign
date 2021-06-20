@@ -46,34 +46,6 @@
       </template>
     </el-table-column>
   </el-table>
-  <table>
-    <thead>
-      <tr>
-        <th>序号</th>
-        <th>姓名</th>
-        <th>电话</th>
-        <th>邮箱</th>
-        <th>操作</th>
-      </tr>
-      <tr v-for="(item, index) of teacherlist" :key="index">
-        <td>{{ index + 1 }}</td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.tel }}</td>
-        <td>{{ item.email }}</td>
-        <td>
-          <button
-            type="button"
-            class="button delButton"
-            size="mini"
-            @click="removeItem(index)"
-            title="删除"
-          >
-            删除
-          </button>
-        </td>
-      </tr>
-    </thead>
-  </table>
 </template>
 <script lang="ts">
 import { computed, defineComponent } from "vue";

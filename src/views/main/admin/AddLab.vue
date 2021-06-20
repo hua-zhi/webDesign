@@ -55,7 +55,7 @@ export default {
         },
       ],
     };
-    var result = ref(true);
+    const result = ref(true);
     // watch(newlab.value, () => {
     //   if (
     //     newlab.value.id == null ||

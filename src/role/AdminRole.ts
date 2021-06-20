@@ -53,10 +53,6 @@ const menuList: Menu[] = [
         path: "/admin/labManage",
       },
       {
-        title: "系统备份管理",
-        path: "/admin/backup",
-      },
-      {
         title: "教师管理",
         path: "/admin/teacherManage",
       },

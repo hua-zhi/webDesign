@@ -22,9 +22,21 @@ export interface Course {
   id?: number;
   name?: string;
   studentNumber?: number;
-  lab?: Lab[];
-  time?: week[];
+  lab?: Lab;
+  term?: string;
+  weeks?: string;
+  week?: string;
+  section?: string;
 }
-export interface week {
-  id?: number;
+enum week {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday,
 }
+// export interface week {
+//   id?: number;
+// }

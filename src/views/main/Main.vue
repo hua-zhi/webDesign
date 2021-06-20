@@ -36,18 +36,4 @@ export default defineComponent({
   font-size: 30px;
   color: white;
 }
-
-/*
-.el-aside {
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-  width: 300px;
-}
-.el-main {
-  background-color: #a3e9cc;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
-} */
 </style>
