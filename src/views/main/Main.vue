@@ -9,9 +9,6 @@
       <el-aside width="200px"> <sidebar /> </el-aside>
       <el-container>
         <el-main><router-view /></el-main>
-        <el-footer class="footer">
-          <el-card> 通讯地址 </el-card>
-        </el-footer>
       </el-container>
     </el-container>
   </el-container>
@@ -25,30 +22,23 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-.el-container {
-  display: flex;
-}
-.header,
-.footer {
-  background-color: #1e886d;
+.header {
+  background-color: #36a886;
   display: inline-block;
-  line-height: 60px;
   width: 100%;
+  height: 80px !important;
   justify-content: space-between;
 }
 .header span {
   position: absolute;
-  padding: 15px;
+  margin: 0 250px;
+  top: 30px;
   font-size: 30px;
   color: white;
 }
+
+/*
 .el-aside {
-  background-color: #a3e9cc;
   color: #333;
   text-align: center;
   line-height: 200px;
@@ -59,6 +49,5 @@ export default defineComponent({
   color: #333;
   text-align: center;
   line-height: 160px;
-  flex: 1;
-}
+} */
 </style>

@@ -61,15 +61,14 @@ const actions: ActionTree<State, State> = {
       }, 50);
     }
   },
-  async [types.UPDATE_LAB]({ commit }, upt: Lab) {
-    // try {
-    //   const resp = await axios.post<ResultVO>("updateLab", upt);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    setTimeout(() => {
-      commit(types.UPDATE_LAB, LabLists());
-    });
+  async [types.UPDATE_LAB]({ commit }, newLab: Lab) {
+    try {
+      console.log("UPDATE_LAB");
+      const resp = await axios.post<ResultVO>("updateLab", newLab);
+      commit(types.UPDATE_LAB, resp.data.data.updated);
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 

@@ -23,7 +23,6 @@
       <el-button type="primary" :disabled="!result" @click="createLab">
         立即创建
       </el-button>
-      <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
     </el-form-item>
   </el-form>
 </template>
@@ -42,7 +41,9 @@ export default {
       id: "",
     });
     const rules = {
-      id: [{ required: true, message: "请输入实验室编号", trigger: "blur" }],
+      number: [
+        { required: true, message: "请输入实验室编号", trigger: "blur" },
+      ],
       place: [
         { required: true, message: "请输入实验室所在地点", trigger: "blur" },
       ],
@@ -54,18 +55,18 @@ export default {
         },
       ],
     };
-    var result = ref(false);
-    watch(newlab.value, () => {
-      if (
-        newlab.value.id == null ||
-        newlab.value.number == null ||
-        newlab.value.machine == null
-      ) {
-        result.value = false;
-      } else {
-        result.value = true;
-      }
-    });
+    var result = ref(true);
+    // watch(newlab.value, () => {
+    //   if (
+    //     newlab.value.id == null ||
+    //     newlab.value.number == null ||
+    //     newlab.value.machine == null
+    //   ) {
+    //     result.value = false;
+    //   } else {
+    //     result.value = true;
+    //   }
+    // });
     const createLab = () => {
       store.dispatch(UPDATE_LAB, {
         id: newlab.value.id,

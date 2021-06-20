@@ -1,27 +1,29 @@
-<template class="login_container">
+<template>
   <div class="login_container">
-    <span>欢迎来到实验室管理系统</span>
     <div class="login_box">
       <!-- <p>teacher: 1001; director: 1002; admin: 2002</p> -->
 
-      <form class="login_form">
+      <el-form class="login_form">
         <label>
-          账号:<input
+          <el-input
             type="text"
             placeholder="请输入用户名"
             v-model="user.number"
+            prefix-icon="el-icon-user-solid"
           />
           <br />
           <br />
-          密码:<input
+          <el-input
             type="text"
             placeholder="请输入密码"
             v-model="user.password"
+            prefix-icon="el-icon-key"
           />
           <br />
-          <button @click="login" class="btns">login</button>
+          <br />
+          <el-button plain type="success" @click="login">login</el-button>
         </label>
-      </form>
+      </el-form>
     </div>
   </div>
 </template>
@@ -45,13 +47,10 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-template {
-  background-color: #000;
-}
 .login_container {
-  /* background-color: #7fd1be; */
-  height: 100%;
-  width: 100%;
+  background-color: #9fe6d4;
+  height: 100vw;
+  width: 100vw;
 }
 
 .login_box {
@@ -70,14 +69,9 @@ span {
 }
 .login_form {
   position: absolute;
-  bottom: 0;
+  bottom: 50px;
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
-}
-
-.btns {
-  display: flex;
-  justify-content: flex-end;
 }
 </style>

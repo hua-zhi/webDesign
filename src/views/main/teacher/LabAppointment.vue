@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <p>实验室预约</p>
     <div class="big">
       <div class="item">
         学期：<select id="one" class="form-control" name="site">
@@ -124,41 +123,63 @@
         </select>
       </div>
       <div class="item">
-        <button class="select">查询</button>
+        <el-button plain type="success" class="select">查询</el-button>
       </div>
     </div>
-    <div class="table">
-      <table>
-        <thead>
-          <tr>
-            <th>序号</th>
-            <th>编号</th>
-            <th>机器数量</th>
-            <th>可选状态</th>
-            <th>描述</th>
-            <th>操作</th>
-          </tr>
-          <tr v-for="(item, index) of labList" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td>{{ item.number }}</td>
-            <td>{{ item.machine }}</td>
-            <td>{{ item.choice }}</td>
-            <td>{{ item.description }}</td>
-            <td>
-              <button
-                type="button"
-                class="button delButton"
-                size="mini"
-                @click="removeItem(index)"
-                title="申请"
-              >
-                申请
-              </button>
-            </td>
-          </tr>
-        </thead>
-      </table>
-    </div>
+    <el-table
+      row-key="date"
+      ref="filterTable"
+      :data="labList"
+      height="500px"
+      style="width: 100%"
+    >
+      <el-table-column
+        prop="id"
+        label="序号"
+        width="180"
+        sortable
+        column-key="id"
+      ></el-table-column>
+      <el-table-column
+        prop="number"
+        label="编号"
+        width="180"
+        sortable
+        column-key="number"
+      ></el-table-column>
+      <el-table-column
+        prop="machine"
+        label="机器数量"
+        width="180"
+        sortable
+        column-key="machine"
+      ></el-table-column>
+      <el-table-column
+        prop="choice"
+        label="可选状态"
+        width="180"
+        sortable
+        column-key="choice"
+      ></el-table-column>
+      <el-table-column
+        prop="description"
+        label="描述"
+        width="180"
+        column-key="description"
+      ></el-table-column>
+      <el-table-column label="操作">
+        <template #default="scope">
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">
+            编辑
+          </el-button>
+          <el-button size="mini" type="danger" @click="dialogVisible = true">
+            <!-- @click="handleDelete(scope.$index, labinfolist, scope.row)" -->
+            删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="table"></div>
   </div>
 </template>
 <script lang="ts">
@@ -179,36 +200,13 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.big {
+/* .big {
   display: flex;
 }
+*/
 .item {
   display: inline-block;
   padding: 10px;
   margin: 10px;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-table th,
-table td {
-  text-align: center;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-tbody tr:nth-child(odd) {
-  background-color: #f2f2f2;
-}
-button {
-  background-color: #23a182;
-  color: white;
-  padding: 10px;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 8px;
-}
-button:hover {
-  background-color: rgb(24, 109, 69);
 }
 </style>
